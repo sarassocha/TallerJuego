@@ -1,5 +1,6 @@
 package pa.taller1.Controlador;
 
+import java.awt.Image;
 import pa.taller1.Vista.VistaPrincipal;
 
 import javax.swing.*;
@@ -40,8 +41,34 @@ public class ControlVista {
         if (opcion == JFileChooser.APPROVE_OPTION) {
 
             File file = fileChooser.getSelectedFile();
-
+            
             try {
+                // ---- Cargar configuración visual ----
+                java.util.Properties props = new java.util.Properties();
+
+                try (java.io.FileInputStream fis = new java.io.FileInputStream(file)) {
+                    props.load(fis);
+                }
+
+                String rutaIcono = props.getProperty("jugador.icono");
+                java.net.URL url = getClass().getResource(rutaIcono);
+                int tamanoIcono = Integer.parseInt(props.getProperty("jugador.icono.tamano"));
+
+                java.awt.image.BufferedImage buffered =
+                        javax.imageio.ImageIO.read(
+                                getClass().getResource(rutaIcono)
+                        );
+
+                Image imgEscalada = buffered.getScaledInstance(
+                        tamanoIcono,
+                        tamanoIcono,
+                        Image.SCALE_SMOOTH
+                );
+
+                ImageIcon iconoFinal = new ImageIcon(imgEscalada);
+
+                // Inyectar en la vista
+                vista.setIconoJugador(iconoFinal);
                 // Validar y cargar equipos a través de ControlPrincipal
                 java.util.List<pa.taller1.Modelo.Equipo> equipos =
                         controlPrincipal.validarYCargarEquipos(file.getAbsolutePath());

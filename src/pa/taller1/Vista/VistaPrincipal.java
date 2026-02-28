@@ -23,7 +23,7 @@ public class VistaPrincipal extends JFrame {
     private JLabel lblTiempo;
     private JLabel lblResultado;
     private JLabel lblIntentos;
-
+    private ImageIcon iconoJugador;
     private JButton btnEmbocar;
     private JButton btnCargar;
 
@@ -42,7 +42,6 @@ public class VistaPrincipal extends JFrame {
         mapaJugadoresVisual = new HashMap<>();
 
         setLayout(new BorderLayout());
-
         crearTop();
         crearCentro();
         crearDerecha();
@@ -55,7 +54,11 @@ public class VistaPrincipal extends JFrame {
     public void setControlVista(ControlVista controlVista) {
         this.controlVista = controlVista;
     }
-
+    
+    public void setIconoJugador(ImageIcon iconoJugador) {
+    this.iconoJugador = iconoJugador;
+}
+    
     public void launchApp() {
         setVisible(true);
     }
@@ -107,11 +110,10 @@ public class VistaPrincipal extends JFrame {
      * Recibe los datos planos de los equipos y jugadores.
      */
     public void mostrarEquipos(Map<String, List<String>> equipos) {
-
+        
         panelEquipos.removeAll();
         mapaEquiposVisual.clear();
         mapaJugadoresVisual.clear();
-
         for (String nombreEquipo : equipos.keySet()) {
 
             JPanel cajaEquipo = new JPanel();
@@ -127,7 +129,7 @@ public class VistaPrincipal extends JFrame {
 
             for (String jugador : equipos.get(nombreEquipo)) {
 
-                JLabel lblJugador = new JLabel(jugador);
+                JLabel lblJugador = new JLabel(jugador, iconoJugador, JLabel.LEFT);
                 lblJugador.setOpaque(true);
                 lblJugador.setBackground(Color.LIGHT_GRAY);
 
