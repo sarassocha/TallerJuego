@@ -17,10 +17,10 @@ public class Equipo implements Serializable {
 
     public Equipo(String nombreProyecto, String nombreEquipo) {
         if (nombreProyecto == null || nombreProyecto.isEmpty()) {
-            throw new IllegalArgumentException("El nombre del proyecto no puede ser vacío");
+            throw new IllegalArgumentException("Tiene que haber un nombre en el proyecto");
         }
         if (nombreEquipo == null || nombreEquipo.isEmpty()) {
-            throw new IllegalArgumentException("El nombre del equipo no puede ser vacío");
+            throw new IllegalArgumentException("El equipo tiene que tener un nombre");
         }
         this.nombreProyecto = nombreProyecto;
         this.nombreEquipo = nombreEquipo;
@@ -29,7 +29,7 @@ public class Equipo implements Serializable {
 
     public void agregarJugador(Jugador jugador) {
         if (jugador == null) {
-            throw new IllegalArgumentException("Jugador no puede ser nulo");
+            throw new IllegalArgumentException("Tienen que haber jugadores");
         }
         jugadores.add(jugador);
     }

@@ -15,12 +15,15 @@ public class Jugador implements Serializable {
     private int intentos;
     private int intentosExitosos;
 
+    
     public Jugador(String codigo, String nombre) {
+        //Valida que el jugador tenga codigo
         if (codigo == null || codigo.isEmpty()) {
-            throw new IllegalArgumentException("Código de jugador no puede ser vacío");
+            throw new IllegalArgumentException("Algun jugador no tiene codigo");
         }
+        //Valida que el jugador tenga nombre
         if (nombre == null || nombre.isEmpty()) {
-            throw new IllegalArgumentException("Nombre de jugador no puede ser vacío");
+            throw new IllegalArgumentException("Algun jugador no puso su nombre");
         }
         this.codigo = codigo;
         this.nombre = nombre;

@@ -10,7 +10,7 @@ import java.io.RandomAccessFile;
  */
 public class PersistenciaResultados {
 
-    private final String ruta = "data/resultados.dat";
+    private final String ruta = "src/Specs/data/resultados.dat";
 
     /**
      * Guarda un nuevo resultado al final del archivo.

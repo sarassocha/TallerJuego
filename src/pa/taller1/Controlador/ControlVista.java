@@ -43,7 +43,7 @@ public class ControlVista {
             File file = fileChooser.getSelectedFile();
             
             try {
-                // ---- Cargar configuración visual ----
+                //  Cargar configuración visual 
                 java.util.Properties props = new java.util.Properties();
 
                 try (java.io.FileInputStream fis = new java.io.FileInputStream(file)) {
@@ -93,7 +93,7 @@ public class ControlVista {
                 actualizarVista();
 
             } catch (java.io.IOException e) {
-                notificarError("Error al cargar archivo: " + e.getMessage());
+                notificarError("Error al cargar archivo");
             }
         }
     }
@@ -190,7 +190,7 @@ public class ControlVista {
      */
     public void notificarCargaExitosa(List<?> equipos) {
         JOptionPane.showMessageDialog(null,
-                "¡Carga exitosa!\n" + equipos.size() + " equipo(s) cargado(s).",
+                "¡Carga exitosa!\n" + equipos.size() + " equipos cargados.",
                 "Éxito",
                 JOptionPane.INFORMATION_MESSAGE);
     }
