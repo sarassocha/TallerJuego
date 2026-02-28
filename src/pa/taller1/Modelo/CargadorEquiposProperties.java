@@ -25,11 +25,14 @@ public class CargadorEquiposProperties {
 
             Equipo equipo = new Equipo(nombreProyecto, nombreEquipo);
 
-            for (int j = 1; j <= 3; j++) {
+            // Cargar dinámicamente todos los jugadores del equipo
+            int j = 1;
+            while (props.getProperty("equipo" + i + ".jugador" + j + ".codigo") != null) {
                 String codigo = props.getProperty("equipo" + i + ".jugador" + j + ".codigo");
                 String nombre = props.getProperty("equipo" + i + ".jugador" + j + ".nombre");
 
                 equipo.agregarJugador(new Jugador(codigo, nombre));
+                j++;
             }
 
             equipos.add(equipo);
