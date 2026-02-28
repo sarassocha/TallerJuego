@@ -16,12 +16,21 @@ public class Equipo implements Serializable {
     private List<Jugador> jugadores;
 
     public Equipo(String nombreProyecto, String nombreEquipo) {
+        if (nombreProyecto == null || nombreProyecto.isEmpty()) {
+            throw new IllegalArgumentException("El nombre del proyecto no puede ser vacío");
+        }
+        if (nombreEquipo == null || nombreEquipo.isEmpty()) {
+            throw new IllegalArgumentException("El nombre del equipo no puede ser vacío");
+        }
         this.nombreProyecto = nombreProyecto;
         this.nombreEquipo = nombreEquipo;
         this.jugadores = new ArrayList<>();
     }
 
     public void agregarJugador(Jugador jugador) {
+        if (jugador == null) {
+            throw new IllegalArgumentException("Jugador no puede ser nulo");
+        }
         jugadores.add(jugador);
     }
 

@@ -16,6 +16,12 @@ public class Jugador implements Serializable {
     private int intentosExitosos;
 
     public Jugador(String codigo, String nombre) {
+        if (codigo == null || codigo.isEmpty()) {
+            throw new IllegalArgumentException("Código de jugador no puede ser vacío");
+        }
+        if (nombre == null || nombre.isEmpty()) {
+            throw new IllegalArgumentException("Nombre de jugador no puede ser vacío");
+        }
         this.codigo = codigo;
         this.nombre = nombre;
         this.puntaje = 0;

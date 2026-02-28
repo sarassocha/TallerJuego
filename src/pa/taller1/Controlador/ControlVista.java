@@ -30,7 +30,7 @@ public class ControlVista {
 
     /**
      * Carga archivo properties usando JFileChooser.
-     * Solicita tiempo por equipo antes de iniciar.
+     * Primero valida las propiedades, luego solicita tiempo.
      */
     public void cargarArchivo() {
 
@@ -41,19 +41,33 @@ public class ControlVista {
 
             File file = fileChooser.getSelectedFile();
 
-            int tiempoEquipo = solicitarTiempoPorEquipo();
+            try {
+                // Validar y cargar equipos a través de ControlPrincipal
+                java.util.List<pa.taller1.Modelo.Equipo> equipos =
+                        controlPrincipal.validarYCargarEquipos(file.getAbsolutePath());
 
-            controlPrincipal.cargarEquiposDesdeProperties(
-                    file.getAbsolutePath(),
-                    tiempoEquipo
-            );
+                if (equipos == null || equipos.isEmpty()) {
+                    notificarError("No se encontraron equipos en el archivo.");
+                    return;
+                }
 
-            Map<String, List<String>> datos =
-                    controlPrincipal.obtenerDatosEquipos();
+                // Si es válido, pedir tiempo
+                int tiempoEquipo = solicitarTiempoPorEquipo();
 
-            vista.mostrarEquipos(datos);
+                // Inicializar juego
+                controlPrincipal.inicializarJuegoConEquipos(equipos, tiempoEquipo);
+                notificarCargaExitosa(equipos);
 
-            actualizarVista();
+                Map<String, List<String>> datos =
+                        controlPrincipal.obtenerDatosEquipos();
+
+                vista.mostrarEquipos(datos);
+
+                actualizarVista();
+
+            } catch (java.io.IOException e) {
+                notificarError("Error al cargar archivo: " + e.getMessage());
+            }
         }
     }
 
@@ -142,6 +156,26 @@ public class ControlVista {
         }
 
         actualizarVista();
+    }
+
+    /**
+     * Notifica carga exitosa de equipos a la vista.
+     */
+    public void notificarCargaExitosa(List<?> equipos) {
+        JOptionPane.showMessageDialog(null,
+                "¡Carga exitosa!\n" + equipos.size() + " equipo(s) cargado(s).",
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * Notifica error durante la carga de equipos.
+     */
+    public void notificarError(String mensaje) {
+        JOptionPane.showMessageDialog(null,
+                mensaje,
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 
     /**

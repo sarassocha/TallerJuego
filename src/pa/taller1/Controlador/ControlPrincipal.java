@@ -29,20 +29,18 @@ public class ControlPrincipal {
     }
 
     /**
-     * Carga equipos desde archivo properties y
-     * inicializa el juego con tiempo definido por usuario.
+     * Valida y carga equipos desde archivo properties.
+     * Lanza excepción si hay error, sin inicializar juego.
      */
-    public void cargarEquiposDesdeProperties(String ruta, int tiempoEquipo) {
+    public List<Equipo> validarYCargarEquipos(String ruta) throws IOException {
+        return controlPersistencia.cargarDesdeProperties(ruta);
+    }
 
-        try {
-            List<Equipo> equipos =
-                    controlPersistencia.cargarDesdeProperties(ruta);
-
-            controlJuego.inicializarJuego(equipos, tiempoEquipo);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    /**
+     * Inicializa el juego con los equipos y tiempo.
+     */
+    public void inicializarJuegoConEquipos(List<Equipo> equipos, int tiempoEquipo) {
+        controlJuego.inicializarJuego(equipos, tiempoEquipo);
     }
 
     public Map<String, List<String>> obtenerDatosEquipos() {
