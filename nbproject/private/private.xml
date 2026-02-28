@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Modelo/Jugador.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Modelo/Equipo.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Modelo/Juego.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Modelo/TipoEmbocada.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Controlador/ControlJugador.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Controlador/ControlEquipo.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Controlador/ControlVista.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Controlador/ControlJuego.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Controlador/Launcher.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/data/resultados.dat</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Modelo/CargadorEquiposProperties.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Modelo/PersistenciaSerializacion.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Modelo/PersistenciaResultados.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Vista/VistaPrincipal.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Vista/VistaResultados.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Controlador/ControlPrincipal.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/src/pa/taller1/Controlador/ControlPersistencia.java</file>
+            <file>file:/C:/Users/Sebas/OneDrive/Documentos/NetBeansProjects/Taller1/data/equipos.properties</file>
+        </group>
+    </open-files>
+</project-private>
