@@ -1,6 +1,8 @@
 package pa.taller1.Controlador;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import pa.taller1.Vista.VistaPrincipal;
 
 import javax.swing.*;
@@ -11,8 +13,9 @@ import java.util.Map;
 /**
  * Intermediario entre Vista y ControlPrincipal.
  * La Vista SOLO conoce esta clase.
+ * Implementa ActionListener para manejar eventos de botones.
  */
-public class ControlVista {
+public class ControlVista implements ActionListener {
 
     private VistaPrincipal vista;
     private ControlPrincipal controlPrincipal;
@@ -23,6 +26,26 @@ public class ControlVista {
         this.vista = new VistaPrincipal();
 
         vista.setControlVista(this);
+        
+        // Configurar listeners de botones
+        vista.getBtnCargar().addActionListener(this);
+        vista.getBtnEmbocar().addActionListener(this);
+    }
+
+    /**
+     * Maneja los eventos de acción de los botones
+     *
+     * @param e Evento de acción
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String comando = e.getActionCommand();
+
+        if (comando.equals("CARGAR")) {
+            cargarArchivo();
+        } else if (comando.equals("EMBOCAR")) {
+            intentarEmbocar();
+        }
     }
 
     public void iniciarVista() {

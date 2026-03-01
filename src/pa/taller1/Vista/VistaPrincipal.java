@@ -66,7 +66,7 @@ public class VistaPrincipal extends JFrame {
     private void crearTop() {
         JPanel top = new JPanel();
         btnCargar = new JButton("Cargar Equipos");
-        btnCargar.addActionListener(e -> controlVista.cargarArchivo());
+        btnCargar.setActionCommand("CARGAR");
         top.add(btnCargar);
         add(top, BorderLayout.NORTH);
     }
@@ -100,8 +100,8 @@ public class VistaPrincipal extends JFrame {
     private void crearAbajo() {
         JPanel abajo = new JPanel();
         btnEmbocar = new JButton("Embocar");
+        btnEmbocar.setActionCommand("EMBOCAR");
         btnEmbocar.setEnabled(false);
-        btnEmbocar.addActionListener(e -> controlVista.intentarEmbocar());
         abajo.add(btnEmbocar);
         add(abajo, BorderLayout.SOUTH);
     }
@@ -210,6 +210,24 @@ public class VistaPrincipal extends JFrame {
 
     public void mostrarResultado(String mensaje) {
         lblResultado.setText("Resultado: " + mensaje);
+    }
+
+    /**
+     * Devuelve el botón de cargar equipos
+     *
+     * @return Botón de cargar
+     */
+    public JButton getBtnCargar() {
+        return btnCargar;
+    }
+
+    /**
+     * Devuelve el botón de embocar
+     *
+     * @return Botón de embocar
+     */
+    public JButton getBtnEmbocar() {
+        return btnEmbocar;
     }
 
     private void sombrearEquipos(String equipoActual) {
