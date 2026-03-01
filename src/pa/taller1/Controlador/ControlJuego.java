@@ -9,25 +9,15 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 /**
- * Motor real del juego.
- * Contiene TODA la lógica del flujo.
+ * Controlador del juego.
+ * Contiene TODA la lógica del flujo del juego.
  */
 public class ControlJuego {
 
-    private List<Equipo> equipos;
-
-    private int indiceEquipoActual;
-    private int indiceJugadorActual;
-
-    private int tiempoPorEquipo;
-    private int tiempoPorJugador;
-    private int tiempoRestanteJugador;
-
-    private boolean juegoTerminado;
+    private Juego juego;
+    private Random random;
 
     private final int TIEMPO_POR_LANZAMIENTO = 3;
-
-    private Random random;
 
     public ControlJuego() {
         random = new Random();
@@ -37,17 +27,7 @@ public class ControlJuego {
      * Inicializa el juego con tiempo definido por el usuario.
      */
     public void inicializarJuego(List<Equipo> equipos, int tiempoEquipo) {
-
-        this.equipos = equipos;
-
-        this.tiempoPorEquipo = tiempoEquipo;
-        this.tiempoPorJugador = tiempoEquipo / 3;
-        this.tiempoRestanteJugador = tiempoPorJugador;
-
-        this.indiceEquipoActual = 0;
-        this.indiceJugadorActual = 0;
-
-        this.juegoTerminado = false;
+        this.juego = new Juego(equipos, tiempoEquipo);
     }
 
     /**
@@ -55,11 +35,11 @@ public class ControlJuego {
      */
     public String ejecutarIntento() {
 
-        if (juegoTerminado) {
+        if (juego.isJuegoTerminado()) {
             return "";
         }
 
-        Jugador jugador = getJugadorActual();
+        Jugador jugador = juego.getJugadorActual();
 
         boolean exito = random.nextBoolean();
         TipoEmbocada tipo;
@@ -84,70 +64,53 @@ public class ControlJuego {
     }
 
     /**
-     * Descuenta tiempo por lanzamiento.
+     * Descuenta tiempo por lanzamiento y cambia turno si es necesario.
      */
     private void descontarTiempo() {
+        int tiempoRestante = juego.getTiempoRestanteJugador() - TIEMPO_POR_LANZAMIENTO;
+        juego.setTiempoRestanteJugador(tiempoRestante);
 
-        tiempoRestanteJugador -= TIEMPO_POR_LANZAMIENTO;
-
-        if (tiempoRestanteJugador <= 0) {
+        if (tiempoRestante <= 0) {
             cambiarTurno();
         }
     }
 
     /**
-     * Cambia jugador o equipo según corresponda.
+     * Cambia al siguiente jugador o equipo.
      */
     private void cambiarTurno() {
+        int indiceJugador = juego.getIndiceJugadorActual() + 1;
 
-        indiceJugadorActual++;
+        if (indiceJugador >= 3) {
+            indiceJugador = 0;
+            int indiceEquipo = juego.getIndiceEquipoActual() + 1;
+            juego.setIndiceEquipoActual(indiceEquipo);
 
-        if (indiceJugadorActual >= 3) {
-
-            indiceJugadorActual = 0;
-            indiceEquipoActual++;
-
-            if (indiceEquipoActual >= equipos.size()) {
-                juegoTerminado = true;
+            if (indiceEquipo >= juego.getEquipos().size()) {
+                juego.setJuegoTerminado(true);
                 return;
             }
         }
 
-        tiempoRestanteJugador = tiempoPorJugador;
+        juego.setIndiceJugadorActual(indiceJugador);
+        juego.setTiempoRestanteJugador(juego.getTiempoPorJugador());
     }
 
     /**
-     * Ahora usa SOLO la variable booleana.
+     * Ahora usa la variable booleana del juego.
      */
     public boolean isJuegoTerminado() {
-        return juegoTerminado;
+        return juego.isJuegoTerminado();
     }
 
-    private Equipo getEquipoActual() {
-        return equipos.get(indiceEquipoActual);
-    }
-
-    private Jugador getJugadorActual() {
-        return getEquipoActual().getJugadores().get(indiceJugadorActual);
-    }
-
-    public String getNombreEquipoActual() {
-        if (juegoTerminado) return "";
-        return getEquipoActual().getNombreEquipo();
-    }
-
-    public String getNombreJugadorActual() {
-        if (juegoTerminado) return "";
-        return getJugadorActual().getNombre();
-    }
-
-    public int getTiempoRestanteJugador() {
-        return tiempoRestanteJugador;
-    }
-
-    public int getIntentosActuales() {
-        if (juegoTerminado) return 0;
-        return getJugadorActual().getIntentos();
+    /**
+     * Obtiene el estado actual del juego en un único objeto.
+     * Encapsula toda la información que la Vista necesita.
+     *
+     * @return EstadoJuego con información actualizada
+     */
+    public EstadoJuego obtenerEstadoActual() {
+        return juego.obtenerEstado();
     }
 
     /**
@@ -155,9 +118,9 @@ public class ControlJuego {
      */
     public Equipo obtenerGanador() {
 
-        Equipo ganador = equipos.get(0);
+        Equipo ganador = juego.getEquipos().get(0);
 
-        for (Equipo e : equipos) {
+        for (Equipo e : juego.getEquipos()) {
 
             if (e.getPuntajeTotal() > ganador.getPuntajeTotal()) {
                 ganador = e;
@@ -179,7 +142,7 @@ public class ControlJuego {
 
         Map<String, List<String>> datos = new HashMap<>();
 
-        for (Equipo equipo : equipos) {
+        for (Equipo equipo : juego.getEquipos()) {
 
             List<String> jugadores = new ArrayList<>();
 

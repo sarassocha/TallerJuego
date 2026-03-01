@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import pa.taller1.Vista.VistaPrincipal;
+import pa.taller1.Modelo.EstadoJuego;
 
 import javax.swing.*;
 import java.io.File;
@@ -246,12 +247,13 @@ public class ControlVista implements ActionListener {
      * Actualiza información visible en pantalla.
      */
     private void actualizarVista() {
-
+        EstadoJuego estado = controlPrincipal.obtenerEstadoActual();
+        
         vista.actualizarDatos(
-                controlPrincipal.getNombreEquipoActual(),
-                controlPrincipal.getNombreJugadorActual(),
-                controlPrincipal.getTiempoRestanteJugador(),
-                controlPrincipal.getIntentosActuales()
+                estado.getNombreEquipo(),
+                estado.getNombreJugador(),
+                estado.getTiempoRestante(),
+                estado.getIntentos()
         );
     }
 }

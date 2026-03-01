@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import pa.taller1.Modelo.Equipo;
+import pa.taller1.Modelo.EstadoJuego;
 
 /**
  * Orquestador principal.
@@ -55,20 +56,14 @@ public class ControlPrincipal {
         return controlJuego.isJuegoTerminado();
     }
 
-    public String getNombreEquipoActual() {
-        return controlJuego.getNombreEquipoActual();
-    }
-
-    public String getNombreJugadorActual() {
-        return controlJuego.getNombreJugadorActual();
-    }
-
-    public int getTiempoRestanteJugador() {
-        return controlJuego.getTiempoRestanteJugador();
-    }
-
-    public int getIntentosActuales() {
-        return controlJuego.getIntentosActuales();
+    /**
+     * Obtiene el estado actual del juego.
+     * Encapsula toda la información que la Vista necesita en un único objeto.
+     *
+     * @return EstadoJuego con información actualizada
+     */
+    public EstadoJuego obtenerEstadoActual() {
+        return controlJuego.obtenerEstadoActual();
     }
 
     /**
